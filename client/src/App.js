@@ -1,8 +1,9 @@
+import Home from "./pages/home/Home"
+// import PersonIcon from '@mui/icons-material/Person';
 function App() {
   return (
-    <div >
-      hello
-    </div>
+    <Home></Home>
+    // <PersonIcon></PersonIcon>
   );
 }
 
