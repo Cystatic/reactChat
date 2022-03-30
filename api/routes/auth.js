@@ -20,7 +20,7 @@ router.post("/register",async (req,res)=>{
         const user = await newUser.save();
         res.status(200).json(user);
     }catch(err){
-        console.log(err)
+        res.status(500).json(err);
     }
 });
 
@@ -32,6 +32,7 @@ router.post("/register",async (req,res)=>{
 //     })
 //     await user.save();
 //     res.send("ok")
+
 // });
 // router.get("/",(req,res)=>{
 //     res.send("its auth route")
@@ -49,7 +50,7 @@ router.post("/login",async (req,res)=>{
         res.status(200).json(user);
 
     }catch(err){
-        console.log(err);
+        res.status(500).json(err);
     }
     
 
