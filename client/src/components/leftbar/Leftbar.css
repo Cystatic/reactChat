@@ -14,13 +14,15 @@
     
 }
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(189, 181, 181);
+    background-color: rgb(167, 162, 162);
 }
 
 .leftbarWrapper{
     padding: 20px;
 }
 .leftbarList{
+    padding: 10px;
+    margin: 0;
     list-style: none;
 }
 .leftbarListItem{
@@ -44,7 +46,7 @@
 }
   
 .leftbarFriendList {
-    padding: 0;
+    padding: 10px;
     margin: 0;
     list-style: none;
 }
