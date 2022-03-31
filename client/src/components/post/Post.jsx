@@ -16,14 +16,14 @@ export default function Post({ post }) {
         setIsLiked(!isLiked);
     }
 
-
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     return (
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img src={Users.filter(u => u.id === post.id)[0].profilePicture} alt="" className="postProfileImg" />
+                        <img src={PF+Users.filter(u => u.id === post.id)[0].profilePicture} alt="" className="postProfileImg" />
                         <span className="postUsername">{Users.filter(u => u.id === post.id)[0].username}</span>
                         <span className="postDate">{post.date}</span>
                     </div>
@@ -33,12 +33,12 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img src={post.photo} alt="" className="postImg" />
+                    <img src={PF+post.photo} alt="" className="postImg" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img src="/assets/like.png" alt="" className="likeIcon" onClick={likeHandler} />
-                        <img src="/assets/heart.png" alt="" className="likeIcon" onClick={likeHandler} />
+                        <img src={PF+"/like.png" }alt="" className="likeIcon" onClick={likeHandler} />
+                        <img src={PF+"heart.png" }alt="" className="likeIcon" onClick={likeHandler} />
                         <span className="postLikeCounter">{like} people like it</span>
                     </div>
                     <div className="postBottomRight">
