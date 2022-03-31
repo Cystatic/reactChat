@@ -11,7 +11,7 @@ import {
   School,
 } from '@mui/icons-material'
 import Friend from "../friend/Friend"
-import {Users} from "../../dummyData"
+import { Users } from "../../dummyData"
 
 export default function Leftbar() {
   return (
@@ -58,8 +58,8 @@ export default function Leftbar() {
         <button className="leftbarButton">更多Info</button>
         <hr className="leftbarHr" />
         <ul className="leftbarFriendList">
-          {Users.map((u)=>(
-            <Friend key = {u.id} user = {u}/>
+          {Users.map((u) => (
+            <Friend key={u.id} user={u} />
           ))}
         </ul>
       </div>

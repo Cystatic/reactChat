@@ -6,11 +6,11 @@ import "./Home.css"
 export default function Home() {
   return (
     <>
-      <Topbar/>
+      <Topbar />
       <div className="homeContainer">
-        <Leftbar/>
-        <Midbar/>
-        <Rightbar/>
+        <Leftbar />
+        <Midbar />
+        <Rightbar />
       </div>
     </>
   )
