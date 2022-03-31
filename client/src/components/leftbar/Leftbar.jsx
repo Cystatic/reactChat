@@ -10,6 +10,9 @@ import {
   Event,
   School,
 } from '@mui/icons-material'
+import Friend from "../friend/Friend"
+import {Users} from "../../dummyData"
+
 export default function Leftbar() {
   return (
     <div className="leftbar">
@@ -55,110 +58,9 @@ export default function Leftbar() {
         <button className="leftbarButton">更多Info</button>
         <hr className="leftbarHr" />
         <ul className="leftbarFriendList">
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
-          <li className="leftbarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-            <span className="leftbarFriendName">Jack</span>
-          </li>
+          {Users.map((u)=>(
+            <Friend key = {u.id} user = {u}/>
+          ))}
         </ul>
       </div>
     </div>

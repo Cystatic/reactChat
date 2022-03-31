@@ -52,15 +52,3 @@
     margin: 0;
     list-style: none;
 }
-.leftbarFriend{
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.leftbarFriendImg{
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover; /* 保持原有尺寸比例。但部分内容可能被剪切 */
-    margin-right: 10px;
-}
