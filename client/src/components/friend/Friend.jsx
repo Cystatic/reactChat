@@ -1,6 +1,6 @@
 import "./Friend.css"
 
-export default function AllFriend({user}) {
+export default function Friend({user}) {
     return (
         <li className="leftbarFriend">
             <img src={user.profilePicture} alt="" className="leftbarFriendImg" />
