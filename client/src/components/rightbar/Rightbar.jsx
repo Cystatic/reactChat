@@ -2,7 +2,7 @@ import "./Rightbar.css"
 import { Users } from "../../dummyData"
 import OnlineFriend from "../onlineFriend/OnlineFriend"
 
-export default function Rightbar({ prfile }) {
+export default function Rightbar({ profile }) {
   const HomeRightbar = () => {
     return (
       <>
@@ -119,7 +119,7 @@ export default function Rightbar({ prfile }) {
     <>
       <div className="rightbar">
         <div className="rightWrapper">
-          <ProfileRightbar />
+          {profile ? <ProfileRightbar/>:<HomeRightbar/>}
         </div>
       </div>
     </>
