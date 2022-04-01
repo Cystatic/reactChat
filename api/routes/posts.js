@@ -77,9 +77,9 @@ router.get("/:id",async (req,res)=>{
 })
 
 //获取一个时间线之前的所有关注者和自己的帖子
-router.get("/timeline/all",async (req,res)=>{
+router.get("/timeline/:userId",async (req,res)=>{
     try{
-        const curUser = await User.findById(req.body.userId);
+        const curUser = await User.findById(req.params.userId);
         const userPosts = await Post.find({userId:curUser._id});
         //Promise 保证取完整
         const friendsPosts = await Promise.all(
