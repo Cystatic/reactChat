@@ -13,12 +13,12 @@ export default function Login() {
                         <input placeholder="Email" className="loginInput" />
                         <input placeholder="Password" className="loginInput" />
                         <button className="loginButton">Log In</button>
-                        <span className="loginForgot">忘记密码？</span> 
+                        <span className="loginForgot">忘记密码？</span>
                         <button className="loginRegisterButton">注册</button>
                     </div>
                 </div>
             </div>
         </div>
-    
-  )
+
+    )
 }

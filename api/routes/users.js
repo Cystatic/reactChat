@@ -59,6 +59,19 @@ router.get("/:id",async (req,res)=>{
         res.status(500).json(err);
     }
 })
+//获取用户信息
+router.get("/",async (req,res)=>{
+    // const userId = req.query.userId;
+    const username = req.query.username;
+    try{
+        const user = await User.findOne({username:username});
+        //不能查看用户密码等私密信息
+        // const {password,updatedAt,...other} = user._doc;
+        res.status(200).json(user);
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
 
 //关注用户
 router.put("/:id/follow",async (req,res)=>{

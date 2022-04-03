@@ -91,5 +91,15 @@ router.get("/timeline/:userId",async (req,res)=>{
     }catch(err){
         res.status(200).json(err);
     }
+});
+//获取一个用户的全部帖子
+router.get("/profile/:userId",async (req,res)=>{
+    try{
+        const curUser = await User.findById(req.params.userId);
+        const userPosts = await Post.find({userId:curUser._id});
+        res.status(200).json(userPosts);
+    }catch(err){
+        res.status(200).json(err);
+    }
 })
 module.exports = router 
