@@ -42,15 +42,18 @@ router.post("/register",async (req,res)=>{
 router.post("/login",async (req,res)=>{
     try{
         const user = await User.findOne({email:req.body.email});
-        !user && res.status(404).json("用户不存在");
+        if(!user)
+            return res.status(404).json("用户不存在");
 
         const vaildPassword = await bcrypt.compare(req.body.password,user.password)
-        !vaildPassword && res.status(400).json("密码错误");
+        if(!vaildPassword)
+            return res.status(400).json("密码错误");
 
-        res.status(200).json(user);
+
+        return res.status(200).json(user);
 
     }catch(err){
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
     
 
