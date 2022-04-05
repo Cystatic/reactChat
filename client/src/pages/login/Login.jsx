@@ -15,7 +15,7 @@ export default function Login() {
     }
     console.log(user);
     const navigate = useNavigate();
-    const toRegister = ()=>{
+    const toRegister = () => {
         navigate("/register");
     }
     return (
@@ -38,7 +38,6 @@ export default function Login() {
                         </button>
                         <span className="loginForgot">忘记密码？</span>
                         <button className="loginRegisterButton" onClick={toRegister} disabled={isFetching}>
-                            
                             创建新账户
                         </button>
                     </div>

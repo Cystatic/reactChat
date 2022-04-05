@@ -46,15 +46,15 @@ export default function Login() {
                 </div>
                 <div className="loginRight" >
                     <div className="registerAlert">
-                    {alert === 1 ?
-                        <Alert severity="success" onClose={() => {setAlert(0)}}>
-                            <AlertTitle>Success</AlertTitle>
-                            This is a success alert — <strong>注册成功!</strong>
-                        </Alert> : alert === 2 ? <Alert severity="error" onClose={() => {setAlert(0)}}>
-                            <AlertTitle>Failre</AlertTitle>
-                            This is a failure alert — <strong>注册失败!该用户已存在</strong>
-                        </Alert> : <></>
-                    }
+                        {alert === 1 ?
+                            <Alert severity="success" onClose={() => { setAlert(0) }}>
+                                <AlertTitle>Success</AlertTitle>
+                                This is a success alert — <strong>注册成功!</strong>
+                            </Alert> : alert === 2 ? <Alert severity="error" onClose={() => { setAlert(0) }}>
+                                <AlertTitle>Failre</AlertTitle>
+                                This is a failure alert — <strong>注册失败!该用户已存在</strong>
+                            </Alert> : <></>
+                        }
                     </div>
                     <form className="loginBox" onSubmit={handleClick}>
                         <input
