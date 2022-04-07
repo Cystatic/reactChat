@@ -12,32 +12,33 @@ export default function Profile() {
     // console.log(params)//可以获得url的值
     const userId = params.userId;
     const [user, setUser] = useState([]);
+
     useEffect(() => {
         const fetchUser = async () => {
-            //获取跟某用户相关的时间线帖子
+            //获取用户
             const res = await axios.get("/users/" + userId)
             setUser(res.data);
         }
         fetchUser();
     }, [userId]);
 
-
     return (
         <>
             <Topbar />
             <div className="profile">
                 <Leftbar />
+                {/* 以下为主页背景头像 */}
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
                             <img
                                 className="profileCoverImg"
-                                src={user.coverPicture ? PF + user.coverPicture : PF + "person/noCover.png"}
+                                src={user.coverPicture ? PF + user.coverPicture : PF + "/person/noCover.png"}
                                 alt=""
                             />
                             <img
                                 className="profileUserImg"
-                                src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"}
+                                src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"}
                                 alt=""
                             />
                         </div>
@@ -47,7 +48,7 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Midbar user={user} userId={userId} />
+                        <Midbar  userId={userId} />
                         <Rightbar user={user} />
                     </div>
                 </div>

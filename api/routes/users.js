@@ -54,9 +54,9 @@ router.get("/:id",async (req,res)=>{
         const user = await User.findById(req.params.id);
         //不能查看用户密码等私密信息
         const {password,updatedAt,...other} = user._doc;
-        res.status(200).json(other);
+        return res.status(200).json(other);
     }catch(err){
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 })
 //获取用户信息

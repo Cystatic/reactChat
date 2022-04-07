@@ -7,10 +7,12 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Topbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const {user,dispatch} = useContext(AuthContext)
+
   const handleClick = (e) => {
     e.preventDefault();
     logoutCall(dispatch);
   }
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -43,7 +45,9 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        <img src={PF + "person/1.jpeg"} alt="" className="topbarImg" />
+        <Link to={`/profile/${user._id}`}>
+        <img src={user.profilePicture?PF + user.profilePicture:PF+"/person/noAvatar.png"} alt="" className="topbarImg" />
+        </Link>
         <button className="logoutButton" onClick={handleClick}>退出登录</button>
       </div>
     </div>

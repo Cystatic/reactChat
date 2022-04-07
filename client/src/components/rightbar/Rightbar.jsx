@@ -10,12 +10,12 @@ export default function Rightbar({ user }) {
         <div className="rightbar">
           <div className="rightbarWrapper">
             <div className="birthdayContainer">
-              <img src={PF + "gift.png"} alt="" className="birthdayImg" />
+              <img src={PF + "/gift.png"} alt="" className="birthdayImg" />
               <span className="birthdayText">
                 <b>Jack</b> and <b>3 friends</b>  have a birthday today
               </span>
             </div>
-            <img src={PF + "ad.png"} alt="" className="rightbarAd" />
+            <img src={PF + "/ad.png"} alt="" className="rightbarAd" />
             <h4 className="rightbarTitle">Online Friends</h4>
             <ul className="rightbarFriendList">
               {Users.map((u) => (
@@ -50,7 +50,7 @@ export default function Rightbar({ user }) {
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/1.jpeg"}
+              src={PF + "/person/1.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -58,7 +58,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/2.jpeg"}
+              src={PF + "/person/2.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -66,7 +66,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/3.jpeg"}
+              src={PF + "/person/3.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -74,7 +74,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/4.jpeg"}
+              src={PF + "/person/4.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -82,7 +82,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/5.jpeg"}
+              src={PF + "/person/5.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -90,7 +90,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/7.jpeg"}
+              src={PF + "/person/7.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -98,7 +98,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/8.jpeg"}
+              src={PF + "/person/8.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
@@ -106,7 +106,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src={PF + "person/9.jpeg"}
+              src={PF + "/person/9.jpeg"}
               alt=""
               className="rightbarFollowingImg"
             />
