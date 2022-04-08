@@ -51,7 +51,7 @@ export default function Post({ post }) {
                     <div className="postTopLeft">
                         <Link to={`profile/${user._id}`}>
 
-                            <img src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"}
+                            <img crossOrigin="anonymous" src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"}
                                 alt=""
                                 className="postProfileImg" />
                         </Link>
@@ -65,14 +65,14 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img src={post.img ? (PF + post.img) : ""}
+                    <img crossOrigin="anonymous" src={post.img ? (PF + post.img) : ""}
                         alt=""
                         className="postImg" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img src={PF + "/like.png"} alt="" className="likeIcon" onClick={likeHandler} />
-                        <img src={PF + "/heart.png"} alt="" className="likeIcon" onClick={likeHandler} />
+                        <img crossOrigin="anonymous" src={PF + "/like.png"} alt="" className="likeIcon" onClick={likeHandler} />
+                        <img crossOrigin="anonymous" src={PF + "/heart.png"} alt="" className="likeIcon" onClick={likeHandler} />
                         <span className="postLikeCounter">{like} people like it</span>
                     </div>
                     <div className="postBottomRight">

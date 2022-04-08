@@ -17,7 +17,9 @@ export default function Midbar({ userId }) {
         // 为啥这里必须多加一斜杠？？？当前主页面url最后没有斜杠，要加上形成
         ? await axios.get("/post/profile/" + userId)
         : await axios.get("/post/timeline/"+curUser._id);
-      setPosts(res.data);
+      setPosts(res.data.sort((p1,p2)=>{
+        return new Date(p2.createdAt) - new Date(p1.createdAt)
+      }));
     }
     fetchPosts();
   }, [userId,curUser]);

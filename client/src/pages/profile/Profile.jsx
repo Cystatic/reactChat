@@ -32,13 +32,15 @@ export default function Profile() {
                     <div className="profileRightTop">
                         <div className="profileCover">
                             <img
+                                crossOrigin="anonymous"
                                 className="profileCoverImg"
-                                src={user.coverPicture ? PF + user.coverPicture : PF + "/person/noCover.png"}
+                                src={user.coverPicture ? PF + user.coverPicture : PF + "person/noCover.png"}
                                 alt=""
                             />
                             <img
+                                crossOrigin="anonymous"
                                 className="profileUserImg"
-                                src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"}
+                                src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"}
                                 alt=""
                             />
                         </div>
@@ -48,7 +50,7 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Midbar  userId={userId} />
+                        <Midbar userId={userId} />
                         <Rightbar user={user} />
                     </div>
                 </div>

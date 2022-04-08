@@ -46,7 +46,7 @@ export default function Topbar() {
           </div>
         </div>
         <Link to={`/profile/${user._id}`}>
-        <img src={user.profilePicture?PF + user.profilePicture:PF+"/person/noAvatar.png"} alt="" className="topbarImg" />
+        <img crossOrigin="anonymous" src={user.profilePicture?PF + user.profilePicture:PF+"/person/noAvatar.png"} alt="" className="topbarImg" />
         </Link>
         <button className="logoutButton" onClick={handleClick}>退出登录</button>
       </div>
