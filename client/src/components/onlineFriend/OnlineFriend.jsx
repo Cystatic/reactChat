@@ -5,7 +5,7 @@ export default function OnlineFriend({ user }) {
     return (
         <li className="rightbarFriend">
             <div className="rightbarProfileImgContainer">
-            <img crossOrigin="anonymous" src={PF + user.profilePicture} alt="" className="rightbarFriendImg" />
+            <img crossOrigin="anonymous" src={user.profilePicture?PF + user.profilePicture:PF+"person/noAvatar.png"} alt="" className="rightbarFriendImg" />
                 <span className="rightbarOnline"></span>
             </div>
             <span className="rightbarUsername">{user.username}</span>
