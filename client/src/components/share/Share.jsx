@@ -1,5 +1,5 @@
 import "./Share.css"
-import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material"
+import { PermMedia, Label, Room, EmojiEmotions, Cancel } from "@mui/icons-material"
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useRef, useState } from "react";
 import axios from "axios"
@@ -9,7 +9,7 @@ export default function Share() {
     const desc = useRef();
     const [file, setFile] = useState(null);
 
-    const submitHandler = async(e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
         console.log(desc.current.value)
         const newPost = {
@@ -23,18 +23,18 @@ export default function Share() {
             data.append("file", file);
             newPost.img = fileName;
 
-            try{
-                await axios.post("/upload",data)
-            }catch(err){
+            try {
+                await axios.post("/upload", data)
+            } catch (err) {
                 console.log(err)
             }
         }
-        
-        try{
-            await axios.post("/post/",newPost);
+
+        try {
+            await axios.post("/post/", newPost);
             console.log(newPost)
             window.location.reload();
-        }catch(err){
+        } catch (err) {
 
         }
     }
@@ -56,6 +56,12 @@ export default function Share() {
                     <input placeholder="What's in your mind ?" className="shareInput" ref={desc} />
                 </div>
                 <hr className="shareHr" />
+                {file && (
+                    <div className="shareImgContainer">
+                        <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
+                        <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+                    </div>
+                )}
                 <form className="shareBottom" onSubmit={submitHandler}>
                     <div className="shareOptions">
                         <label htmlFor="file" className="shareOption">
@@ -82,7 +88,7 @@ export default function Share() {
                             <span className="shareOptionText">Feelings</span>
                         </div>
                     </div>
-                    <button className="shareButton" type ="submit">Share</button>
+                    <button className="shareButton" type="submit">Share</button>
                 </form>
             </div>
 

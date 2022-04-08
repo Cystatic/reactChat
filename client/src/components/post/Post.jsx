@@ -49,7 +49,7 @@ export default function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <Link to={`profile/${user._id}`}>
+                        <Link to={`/profile/${user._id}`}>
 
                             <img crossOrigin="anonymous" src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"}
                                 alt=""
