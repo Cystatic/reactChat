@@ -12,8 +12,32 @@ import {
 } from '@mui/icons-material'
 import Friend from "../friend/Friend"
 import { Users } from "../../dummyData"
+import { Link } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../../context/AuthContext"
+import axios from "axios"
+
+
+
+
 
 export default function Leftbar() {
+
+  const {user} = useContext(AuthContext)
+  const [allUsers,setAllUsers] = useState([]);
+
+  useEffect(()=>{
+    const getAllUsers = async() =>{
+      try{
+        const res = await axios.get("/users/allUsers/"+user._id) 
+        setAllUsers(res.data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    getAllUsers()
+  },[user])
+  console.log(allUsers)
   return (
     <div className="leftbar">
       <div className="leftbarWrapper">
@@ -23,7 +47,9 @@ export default function Leftbar() {
             <span className="leftbarListItemText">社群</span>
           </li>
           <li className="leftbarListItem">
+            <Link to={"/messenger"}>
             <Chat className="leftbarIcon" />
+            </Link>
             <span className="leftbarListItemText">聊天</span>
           </li>
           <li className="leftbarListItem">
@@ -58,8 +84,8 @@ export default function Leftbar() {
         <button className="leftbarButton">更多Info</button>
         <hr className="leftbarHr" />
         <ul className="leftbarFriendList">
-          {Users.map((u) => (
-            <Friend key={u.id} user={u} />
+          {allUsers.map((u) => (
+            <Friend key={u._id} user={u} />
           ))}
         </ul>
       </div>

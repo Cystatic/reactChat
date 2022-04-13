@@ -30,7 +30,6 @@
 .leftbarListItem{
     margin-bottom: 20px;
     display: flex;
-    align-items: center;
 }
 .leftbarIcon{
     margin-right: 15px;

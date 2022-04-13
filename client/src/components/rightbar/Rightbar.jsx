@@ -13,12 +13,14 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([])
 
   const [followed, setFollowed] = useState(
-    curUser.followings.includes(user?._id)
+    curUser?.followings.includes(user?._id)
   );
 
-  console.log(curUser)
-  console.log(followed)
+  useEffect(()=>{
+    setFollowed(curUser?.followings.includes(user?._id))
+  },[user,curUser])
 
+  console.log(followed)
   // const handleClick = async() => {
   //   try{
   //     if(followed){

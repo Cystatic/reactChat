@@ -6,6 +6,10 @@ import ChatOnline from "../../components/chatOnline/ChatOnline";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { io } from "socket.io-client";
+
+
+
 export default function Messenger() {
 
     const { user } = useContext(AuthContext)
@@ -14,6 +18,39 @@ export default function Messenger() {
     const [messages, setMessages] = useState(null)
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
+    const [arrivalMessage, setArrivalMessage] = useState(null)
+    const [onlineUsers, setOnlineUsers] = useState([]);
+    const socket = useRef()
+    useEffect(()=>{
+        socket.current = io.connect("ws://localhost:8900");
+    },[user])
+    // const socket = io.connect("ws://localhost:8900");
+
+
+    useEffect(() => {
+        socket.current.on("welcome", message => {
+            console.log(message)
+        })
+        socket.current.emit("addUser", user?._id);
+        socket.current.on("getUsers", users => {
+            setOnlineUsers(
+                user.followings.filter((f) => users.some((u) => u.userId === f))
+            );
+        })
+        socket.current.on("getMessage", (data) => {
+            setArrivalMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now()
+            })
+        })
+    }, [user,socket])
+
+    useEffect(() => {
+        arrivalMessage &&
+            curChat?.members.includes(arrivalMessage.sender) &&
+            setMessages((prev) => [...prev, arrivalMessage])
+    }, [arrivalMessage, curChat])
 
     useEffect(() => {
         const getConversations = async () => {
@@ -46,6 +83,14 @@ export default function Messenger() {
             text: newMessage,
             conversationId: curChat._id,
         };
+        const recieverId = curChat.members.find(
+            (member) => member != user._id
+        )
+        socket.current.emit("sendMessage", {
+            senderId: user._id,
+            recieverId,
+            text: newMessage
+        })
         try {
             const res = await axios.post("/message", message);
             setMessages([...messages, res.data]);
@@ -58,8 +103,7 @@ export default function Messenger() {
     //每次消息都定位到最新
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, [messages]);
-
+    }, [messages]);
     return (
         <>
             <Topbar />
@@ -84,7 +128,7 @@ export default function Messenger() {
                                 <div className="chatBoxTop">
                                     {messages.map((m) => (
                                         <div key={m._id} ref={scrollRef}>
-                                            <Message  own={m.sender === user._id} message={m} />
+                                            <Message key={m._id} own={m.sender === user._id} message={m} />
                                         </div>
                                     ))}
                                 </div>
@@ -107,7 +151,11 @@ export default function Messenger() {
 
                 <div className="chatOnline">
                     <div className="chatOnlineWrapper">
-                        <ChatOnline />
+                        <ChatOnline
+                            onlineUsers={onlineUsers}
+                            curUserId = {user._id}
+                            setCurChat={setCurChat}
+                        />
                     </div>
                 </div>
             </div>

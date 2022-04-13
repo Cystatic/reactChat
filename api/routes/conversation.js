@@ -31,7 +31,7 @@ router.get("/:userId", async (req, res) => {
 //获得俩人间的会话
 router.get("/find/:firstUserId/:SecondUserId",async (req,res)=>{
     try{
-        const conversation = await Conversation.find({
+        const conversation = await Conversation.findOne({
             members:{ $all:[req.params.firstUserId,req.params.SecondUserId]},
         });
         res.status(200).json(conversation)
