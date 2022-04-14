@@ -42,6 +42,14 @@ const AuthReducer = (state, action) => {
           ),
         },
       };
+      case "JOINED":
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            joinedGroups: [...state.user.joinedGroups, action.payload],
+          },
+        };
     default:
       return state;
   }

@@ -9,7 +9,6 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 
-
 export default function Messenger() {
 
     const { user } = useContext(AuthContext)
@@ -67,7 +66,7 @@ export default function Messenger() {
     useEffect(() => {
         const getMessages = async () => {
             try {
-                const res = await axios.get("/message/" + curChat?._id)
+                const res = await axios.get("/message/conversation/" + curChat?._id)
                 setMessages(res.data)
             } catch (err) {
                 console.log(err)
@@ -75,7 +74,6 @@ export default function Messenger() {
         }
         getMessages();
     }, [curChat])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
@@ -84,7 +82,7 @@ export default function Messenger() {
             conversationId: curChat._id,
         };
         const recieverId = curChat.members.find(
-            (member) => member != user._id
+            (member) => member !== user._id
         )
         socket.current.emit("sendMessage", {
             senderId: user._id,

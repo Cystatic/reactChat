@@ -56,6 +56,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       enum: [1, 2, 3],
     },
+    joinedGroups:{
+      type:Array,
+      default:[]
+    },
   },
   { timestamps: true }
 );

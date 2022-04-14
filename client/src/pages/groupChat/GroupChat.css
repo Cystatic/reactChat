@@ -1,0 +1,105 @@
+.groupChat{
+    height: calc(100vh - 70px);
+    display: flex;
+}
+.groupMenu {
+    flex: 3.5;
+}
+.groupBox {
+    flex: 5.5;
+}
+.groupMembers {
+    flex: 3;
+}
+.groupMenuWrapper,
+.groupMembersWrapper,
+.groupBoxWrapper
+{
+    padding: 15px;
+    height: 100%;
+}
+.searchBox{
+    display: flex;
+    margin-bottom: 30px;
+}
+.groupMenuInput {
+    flex:4;
+    width: 80%;
+    padding: 0 0 10px 0;
+    border: none;
+    border-bottom: 1px solid gray;    
+}
+.searchImg{
+    flex: 1;
+}
+.groupMenuInput:focus {
+    outline: none;
+}
+
+.newGroup{
+    display: flex;
+}
+.newGroupButton{
+    margin: 0 150px;
+    border: none;
+    background-color: #1872f2;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.newGroupNameInput{
+    width: 60%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid gray;
+    margin-bottom: 20px;
+}
+.newGroupNameInput:focus{
+    outline: none;
+}
+.confirmButton{
+    margin-left: 20px;
+    height: 30px;
+    width: 50px;
+    border: none;
+    background-color: #1872f2;
+    color: white;
+    border-radius: 5px;
+}
+.groupBoxWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.groupBoxTop{
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+.groupBoxBottom{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatMessageInput {
+    width: 80%;
+    height: 90px;
+    padding: 10px;
+}
+.chatSubmitButton {
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: teal;
+    color: white;
+}

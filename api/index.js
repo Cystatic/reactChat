@@ -10,6 +10,7 @@ const authRoute = require("./routes/auth")
 const postRoute = require("./routes/posts")
 const conversationRoute = require("./routes/conversation")
 const messageRoute = require("./routes/message")
+const groupRoute = require("./routes/group")
 const multer = require("multer")
 const path = require("path");
 
@@ -46,6 +47,7 @@ app.use("/api/auth",authRoute);
 app.use("/api/post",postRoute);
 app.use("/api/conversation",conversationRoute);
 app.use("/api/message",messageRoute);
+app.use("/api/group",groupRoute);
 
 // 上传文件
 const storage = multer.diskStorage({

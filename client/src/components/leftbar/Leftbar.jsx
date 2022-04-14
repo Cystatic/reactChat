@@ -11,7 +11,6 @@ import {
   School,
 } from '@mui/icons-material'
 import Friend from "../friend/Friend"
-import { Users } from "../../dummyData"
 import { Link } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
@@ -23,20 +22,20 @@ import axios from "axios"
 
 export default function Leftbar() {
 
-  const {user} = useContext(AuthContext)
-  const [allUsers,setAllUsers] = useState([]);
+  const { user } = useContext(AuthContext)
+  const [allUsers, setAllUsers] = useState([]);
 
-  useEffect(()=>{
-    const getAllUsers = async() =>{
-      try{
-        const res = await axios.get("/users/allUsers/"+user._id) 
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const res = await axios.get("/users/allUsers/" + user._id)
         setAllUsers(res.data)
-      }catch(err){
+      } catch (err) {
         console.log(err)
       }
     }
     getAllUsers()
-  },[user])
+  }, [user])
   console.log(allUsers)
   return (
     <div className="leftbar">
@@ -48,7 +47,7 @@ export default function Leftbar() {
           </li>
           <li className="leftbarListItem">
             <Link to={"/messenger"}>
-            <Chat className="leftbarIcon" />
+              <Chat className="leftbarIcon" />
             </Link>
             <span className="leftbarListItemText">聊天</span>
           </li>
@@ -57,8 +56,11 @@ export default function Leftbar() {
             <span className="leftbarListItemText">视频</span>
           </li>
           <li className="leftbarListItem">
-            <Group className="leftbarIcon" />
+            <Link to={"/groupChat"}>
+              <Group className="leftbarIcon" />
+            </Link>
             <span className="leftbarListItemText">群组</span>
+
           </li>
           <li className="leftbarListItem">
             <Bookmark className="leftbarIcon" />

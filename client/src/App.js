@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Messenger from "./pages/messenger/Messenger";
+import GroupChat from "./pages/groupChat/GroupChat";
 
 function App() {
   const {user} = useContext(AuthContext)
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/profile/:userId" element={<Profile />}></Route>
         <Route path="/messenger" element={user?<Messenger />:<Login/>}></Route>
+        <Route path="/groupChat" element={user?<GroupChat />:<Login/>}></Route>
       </Routes>
     </BrowserRouter>
   );

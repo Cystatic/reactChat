@@ -22,3 +22,7 @@ export const Unfollow = (userId) => ({
   type: "UNFOLLOW",
   payload: userId,
 });
+export const Joined = (groupId) => ({
+  type: "JOINED",
+  payload: groupId,
+});

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
+const Group = require("../models/Group")
 
 router.get("/",(req,res)=>{
     res.send("its user route")
@@ -138,15 +139,30 @@ router.put("/:id/unfollow", async (req,res)=>{
     }
 })
 
-//获得所有用户
+//获得所有用户(除自身)
 router.get("/allUsers/:id",async(req,res)=>{
     try{
-        const users = await User.find();
+        const users = await User.find({_id:{$ne:req.params.id}});
         res.status(200).json(users)
     }catch(err){
         res.status(500).json(err)
     }
 })
 
+
+//获取用户加入的所有群聊
+router.get("/allGroups/:id",async(req,res)=>{
+    try{
+        const user = await User.findById(req.params.id);
+        const groups = await Promise.all(
+            user.joinedGroups.map((groupId)=>{
+                return Group.findById(groupId)
+            })
+        );
+        res.status(200).json(groups)
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
 
 module.exports = router
