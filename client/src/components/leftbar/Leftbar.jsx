@@ -36,7 +36,6 @@ export default function Leftbar() {
     }
     getAllUsers()
   }, [user])
-  console.log(allUsers)
   return (
     <div className="leftbar">
       <div className="leftbarWrapper">

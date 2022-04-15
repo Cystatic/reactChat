@@ -37,6 +37,19 @@ io.on("connection",(socket)=>{
         io.to(reciever.socketId).emit("getMessage",{senderId,text})
     })
 
+    //加入群聊房间
+    socket.on("joinedRoom",({roomId})=>{
+        socket.join(roomId)
+        console.log(`User with Id : ${socket.id} joined Room-${roomId}`);
+    })
+
+    //接受群聊信息并转发到相应房间
+    socket.on("sendGroupMessage",({senderId,groupId,text})=>{
+        console.log(text)
+        io.to(groupId).emit("recieveMessage",{senderId,text})
+        console.log(text)
+    })
+
     //when disconnect
     socket.on("disconnect", () => {
         console.log(`a user disconnected!${socket.id}`);

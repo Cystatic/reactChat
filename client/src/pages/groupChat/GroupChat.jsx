@@ -7,6 +7,8 @@ import GroupMember from "../../components/groupMember/GroupMember"
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios"
 import SearchIcon from '@mui/icons-material/Search';
+import { io } from "socket.io-client";
+
 export default function Groupgroup() {
 
 
@@ -22,6 +24,33 @@ export default function Groupgroup() {
     const [messages, setMessages] = useState([])
     const scrollRef = useRef();
     const newMessage = useRef();
+    const socket = useRef();
+    const [arrivalMessage, setArrivalMessage] = useState(null)
+
+    useEffect(()=>{
+        socket.current = io.connect("ws://localhost:8900");
+    },[user])
+
+    useEffect(()=>{
+        socket.current.on("welcome", message => {
+            console.log(message)
+        })
+
+        socket.current.on("recieveMessage",(data)=>{
+            setArrivalMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now()
+            })
+        })
+    },[socket])
+
+    useEffect(()=>{
+        arrivalMessage &&
+            arrivalMessage.sender!==user._id &&
+            curGroup?.members.includes(arrivalMessage.sender) &&
+            setMessages((prev) => [...prev, arrivalMessage])
+    },[arrivalMessage,curGroup,user])
 
 
     const handleNewGroup = () => {
@@ -70,21 +99,30 @@ export default function Groupgroup() {
         getGroups()
     }, [user, newGroup])
 
+
+    //以下俩个响应选中哪个群聊
     const handleSearchedGroup = async (group, e) => {
+        e.preventDefault()
         //先判断搜到的群是否加入过，没有则加入  
         if (user.joinedGroups.includes(group._id)) {
             setCurGroup(group)
         } else {
             try {
                 const res = await axios.put("/group/join", { userId: user._id, groupId: group._id })
-                setCurGroup(group)
+                await setCurGroup(group)
                 console.log(res.data)
             } catch (err) {
                 console.log(err)
             }
         }
-
     }
+
+    const handleJoinedGroup = async (group, e) => {
+        e.preventDefault()
+        setCurGroup(group)      
+    }
+   
+
     //点击群聊后，获取当前群聊的历史信息
     useEffect(() => {
         const getMessages = async () => {
@@ -96,6 +134,9 @@ export default function Groupgroup() {
             }
         }
         getMessages();
+        if(curGroup){
+            socket.current.emit("joinedRoom",{roomId:curGroup._id})     
+        }    
     }, [curGroup])
 
     //获取当前群的全部成员
@@ -120,6 +161,12 @@ export default function Groupgroup() {
 
     const handleSendMessage = async(e) => {
         e.preventDefault();
+
+        socket.current.emit("sendGroupMessage",{
+            senderId: user._id,
+            groupId: curGroup?._id,
+            text: newMessage.current.value
+        })
         const curMessage = {
             groupId : curGroup._id,
             sender: user._id,
@@ -172,7 +219,7 @@ export default function Groupgroup() {
                         <div>
                             {!isSearch ?
                                 groups.map((group) => (
-                                    <div key={group._id} onClick={() => { setCurGroup(group) }}>
+                                    <div key={group._id} onClick={(e) => { handleJoinedGroup(group,e) }}>
                                         <Group key={group._id} group={group} />
                                     </div>
                                 )) :
