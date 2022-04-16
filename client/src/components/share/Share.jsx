@@ -1,10 +1,14 @@
 import "./Share.css"
 import { PermMedia, Label, Room, EmojiEmotions, Cancel } from "@mui/icons-material"
-import { AuthContext } from "../../context/AuthContext";
-import { useContext, useRef, useState } from "react";
+// import { AuthContext } from "../../context/AuthContext";
+import { useRef, useState } from "react";
 import axios from "axios"
+import { useSelector } from "react-redux";
+
 export default function Share() {
-    const { user } = useContext(AuthContext);
+    
+    // const { user } = useContext(AuthContext);
+    const user = useSelector((state) => state.user.userInfo);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const desc = useRef();
     const [file, setFile] = useState(null);

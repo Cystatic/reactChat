@@ -1,15 +1,20 @@
 import "./Login.css"
 import { useContext, useRef, useState } from "react"
-import { loginCall } from "../../apiCalls";
-import { AuthContext } from "../../context/AuthContext";
+// import { loginCall } from "../../apiCalls";
+// import { AuthContext } from "../../context/AuthContext";
 import { Alert, AlertTitle, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { loginCall } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
     const email = useRef();
     const password = useRef();
     const [alert, setAlert] = useState(0)
-    const { user, isFetching, error, dispatch } = useContext(AuthContext)
+    const dispatch = useDispatch();
+    const pending = useSelector((state) => state.user.pending);
+    const error = useSelector((state) => state.user.error);
+
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -43,15 +48,15 @@ export default function Login() {
                     <div className="loginBox">
                         <input placeholder="Email" type="email" className="loginInput" ref={email} required />
                         <input placeholder="Password" type="password" className="loginInput" ref={password} required minLength={6} />
-                        <button className="loginButton" disabled={isFetching}>
-                            {isFetching ? (
+                        <button className="loginButton" disabled={pending}>
+                            {pending ? (
                                 <CircularProgress color="secondary" size="20px" />
                             ) : (
                                 "Log In"
                             )}
                         </button>
                         <span className="loginForgot">忘记密码？</span>
-                        <button className="loginRegisterButton" onClick={toRegister} disabled={isFetching}>
+                        <button className="loginRegisterButton" onClick={toRegister} disabled={pending}>
                             创建新账户
                         </button>
                     </div>

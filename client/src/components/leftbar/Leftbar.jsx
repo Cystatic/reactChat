@@ -12,17 +12,15 @@ import {
 } from '@mui/icons-material'
 import Friend from "../friend/Friend"
 import { Link } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
-import { AuthContext } from "../../context/AuthContext"
+import { useEffect, useState } from "react"
+// import { AuthContext } from "../../context/AuthContext"
 import axios from "axios"
-
-
-
+import { useSelector } from "react-redux"
 
 
 export default function Leftbar() {
 
-  const { user } = useContext(AuthContext)
+  const user = useSelector((state) => state.user.userInfo);
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {

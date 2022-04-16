@@ -8,7 +8,7 @@ router.get("/",(req,res)=>{
 });
 
 //更新用户信息
-router.put("/:id",async (req,res)=>{
+router.put("/update/:id",async (req,res)=>{
     if(req.body.userId === req.params.id || req.body.isAdmin){
         //密码要多一道处理
         if(req.body.password){
@@ -96,16 +96,16 @@ router.get("/friends/:userId",async (req,res)=>{
 })
 
 //关注用户
-router.put("/:id/follow",async (req,res)=>{
-    if(req.params.id !== req.body.userId){
+router.put("/follow",async (req,res)=>{
+    if(req.body.friendId !== req.body.userId){
         try{
-            const user = await User.findById(req.params.id);
+            const user = await User.findById(req.body.friendId);
             const curUser = await User.findById(req.body.userId);
             if(!user.followers.includes(req.body.userId)){
                 //推进去
                 await user.updateOne({ $push: {followers:req.body.userId}});
-                await curUser.updateOne({$push: {followings:req.params.id}})
-                res.status(200).json("关注成功");
+                await curUser.updateOne({$push: {followings:req.body.friendId}})
+                res.status(200).json(req.body.friendId);
             }else{
                 res.status(403).json("你已经关注过该用户")
             }
@@ -118,16 +118,16 @@ router.put("/:id/follow",async (req,res)=>{
 });
 
 //取关用户
-router.put("/:id/unfollow", async (req,res)=>{
-    if(req.params.id !== req.body.userId){
+router.put("/unfollow", async (req,res)=>{
+    if(req.body.friendId !== req.body.userId){
         try{
-            const user = await User.findById(req.params.id);
+            const user = await User.findById(req.body.friendId);
             const curUser = await User.findById(req.body.userId);
             if(user.followers.includes(req.body.userId)){
                 //拉出来
                 await user.updateOne({ $pull: {followers:req.body.userId}});
-                await curUser.updateOne({$pull: {followings:req.params.id}})
-                res.status(200).json("取关成功");
+                await curUser.updateOne({$pull: {followings:req.body.friendId}})
+                res.status(200).json(req.body.friendId);
             }else{
                 res.status(403).json("你未关注过该用户")
             }

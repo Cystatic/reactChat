@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     const user = await User.findById(req.body.userId)
     const savedNewGroup = await newGroup.save();
     await user.updateOne({ $push: { joinedGroups:  savedNewGroup._id+""} });
-    res.status(200).json(savedNewGroup);
+    res.status(200).json(savedNewGroup._id);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -39,7 +39,7 @@ router.put("/join", async (req, res) => {
     if (!group.members.includes(req.body.userId)) {
       await group.updateOne({ $push: { members: req.body.userId } });
       await user.updateOne({ $push: { joinedGroups: req.body.groupId } });
-      return res.status(200).json("加群成功");
+      return res.status(200).json(req.body.groupId);
     } else {
       return res.status(200).json("你已在该群");
     }

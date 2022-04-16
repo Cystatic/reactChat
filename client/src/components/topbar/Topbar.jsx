@@ -1,17 +1,24 @@
 import "./Topbar.css"
 import { Search, Person, Chat, Notifications } from '@mui/icons-material';
 import { Link } from "react-router-dom"
-import { logoutCall } from "../../apiCalls";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+// import { logoutCall } from "../../apiCalls";
+// import { useContext } from "react";
+// import { AuthContext } from "../../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutCall } from "../../redux/apiCalls";
+
 export default function Topbar() {
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const {user,dispatch} = useContext(AuthContext)
+  // const {user,dispatch} = useContext(AuthContext)
+  const user = useSelector((state) => state.user.userInfo);
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
     logoutCall(dispatch);
   }
+  
 
   return (
     <div className="topbarContainer">

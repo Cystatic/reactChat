@@ -1,10 +1,11 @@
 import "./Post.css"
 import { MoreVert } from "@mui/icons-material"
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect} from "react"
 import axios from "axios"
 import { format } from "timeago.js"
 import { Link } from "react-router-dom"
-import { AuthContext } from "../../context/AuthContext"
+import { useSelector } from "react-redux"
+// import { AuthContext } from "../../context/AuthContext"
 
 export default function Post({ post }) {
     // 找到用户id为1的用户
@@ -12,7 +13,8 @@ export default function Post({ post }) {
     // console.log(user[0].username);
 
     //当前登录用户
-    const { user: curUser } = useContext(AuthContext);
+    // const { user: curUser } = useContext(AuthContext);
+    const curUser = useSelector((state) => state.user.userInfo);
 
     const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);

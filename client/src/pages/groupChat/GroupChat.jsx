@@ -1,20 +1,26 @@
 import "./GroupChat.css"
 import Topbar from "../../components/topbar/Topbar"
-import { useContext, useEffect, useRef, useState } from "react"
+import {useEffect, useRef, useState } from "react"
 import Group from "../../components/group/Group"
 import Message from "../../components/message/Message"
 import GroupMember from "../../components/groupMember/GroupMember"
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
 import axios from "axios"
 import SearchIcon from '@mui/icons-material/Search';
 import { io } from "socket.io-client";
+import { useDispatch, useSelector } from "react-redux"
+import { joinedGroupCall } from "../../redux/apiCalls"
+import {joinedGroup} from "../../redux/userSlice"
 
 export default function Groupgroup() {
 
 
     const [newGroup, setNewGroup] = useState(false)
     const [newGroupName, setNewGroupName] = useState("")
-    const { user, dispatch } = useContext(AuthContext)
+    // const { user, dispatch } = useContext(AuthContext)
+    const user = useSelector((state) => state.user.userInfo);
+    const error = useSelector((state) => state.user.error);
+    const dispatch = useDispatch();
     const [groups, setGroups] = useState([])
     const [curGroup, setCurGroup] = useState(null)
     const searchName = useRef()
@@ -64,8 +70,11 @@ export default function Groupgroup() {
         }
         try {
             const res = await axios.post("/group", newGroup);
-            console.log(res)
-            dispatch({ type: "JOINED", payload: res.data._id });
+            // console.log(res)
+            
+            // dispatch({ type: "JOINED", payload: res.data._id });
+            dispatch(joinedGroup(res.data))
+            
             setNewGroup(false)
         } catch (err) {
             console.log(err)
@@ -108,9 +117,10 @@ export default function Groupgroup() {
             setCurGroup(group)
         } else {
             try {
-                const res = await axios.put("/group/join", { userId: user._id, groupId: group._id })
+                joinedGroupCall({ userId: user._id, groupId: group._id },dispatch)
+                // const res = await axios.put("/group/join", { userId: user._id, groupId: group._id })
                 await setCurGroup(group)
-                console.log(res.data)
+                console.log(error)
             } catch (err) {
                 console.log(err)
             }
@@ -254,7 +264,7 @@ export default function Groupgroup() {
                                 </button>
                             </div>
                         </> : 
-                        <><span className="noConversationText">Open a conversation to start a chat.</span></>
+                        <><span className="noConversationText">Open a group to start a chat.</span></>
                     }
                     </div>
                 </div>

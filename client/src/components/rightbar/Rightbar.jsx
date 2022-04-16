@@ -1,15 +1,19 @@
 import "./Rightbar.css"
 import OnlineFriend from "../onlineFriend/OnlineFriend"
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { followCall, unfollowCall } from "../../redux/apiCalls";
 
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const { user: curUser, dispatch } = useContext(AuthContext);
+  // const { user: curUser, dispatch } = useContext(AuthContext);
+  const curUser = useSelector((state) => state.user.userInfo);
+  const dispatch = useDispatch();
   const [friends, setFriends] = useState([])
 
   const [followed, setFollowed] = useState(
@@ -41,15 +45,9 @@ export default function Rightbar({ user }) {
   const handleClick = async () => {
     try {
       if (followed) {
-        await axios.put(`/users/${user._id}/unfollow`, {
-          userId: curUser._id,
-        });
-        dispatch({ type: "UNFOLLOW", payload: user._id });
+        unfollowCall({userId:curUser._id,friendId:user._id},dispatch)
       } else {
-        await axios.put(`/users/${user._id}/follow`, {
-          userId: curUser._id,
-        });
-        dispatch({ type: "FOLLOW", payload: user._id });
+        followCall({userId:curUser._id,friendId:user._id},dispatch)
       }
       setFollowed(!followed);
     } catch (err) {

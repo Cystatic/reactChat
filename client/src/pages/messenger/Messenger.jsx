@@ -3,15 +3,17 @@ import Topbar from "../../components/topbar/Topbar"
 import Message from "../../components/message/Message";
 import Conversation from "../../components/conversation/Conversation";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import {  useEffect, useRef, useState } from "react";
+// import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 
 
 export default function Messenger() {
 
-    const { user } = useContext(AuthContext)
+    // const { user } = useContext(AuthContext)
+    const user = useSelector((state) => state.user.userInfo);
     const [conversations, setConversations] = useState([])
     const [curChat, setCurChat] = useState(null)
     const [messages, setMessages] = useState(null)

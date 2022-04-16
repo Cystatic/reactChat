@@ -1,13 +1,15 @@
 import "./Midbar.css"
 import Share from "../share/Share"
 import Post from "../post/Post"
-import { useContext, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import axios from "axios"
-import { AuthContext } from "../../context/AuthContext"
+// import { AuthContext } from "../../context/AuthContext"
+import { useSelector } from "react-redux"
 
 export default function Midbar({ userId }) {
   const [posts, setPosts] = useState([]);
-  const {user:curUser} = useContext(AuthContext);
+  // const {user:curUser} = useContext(AuthContext);
+  const curUser = useSelector((state) => state.user.userInfo);
   // // useEffect的第二个参数只要发生改变则箭头函数就会执行一次
   // const [text,setText] = useState("");
   useEffect(() => {
